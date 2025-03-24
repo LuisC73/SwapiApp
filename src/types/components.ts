@@ -19,19 +19,18 @@ export interface InputProps {
 }
 
 // molecules
-
 export interface CardProps {
-  data: any;
+  title?: string;
+  children: React.ReactNode;
 }
 
-export interface CharacterCardProps extends CardProps {
+export interface TouchableCardProps extends CardProps {
   onPress: () => void;
 }
 
 export interface SearchInputProps {
   input: InputProps;
   button: ButtonProps;
-  onSearch: () => void;
 }
 
 // organisms

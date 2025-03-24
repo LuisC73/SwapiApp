@@ -1,12 +1,12 @@
 import {useQuery} from '@tanstack/react-query';
-import {getPeople} from '../api/swapi';
+import {searchPeople} from '../api/swapi';
 import {translatePeopleAttributes} from '../utils/translate';
 
-export const useGetPeople = (limit: number = 5) => {
+export const useSearchPerson = (query: string) => {
   return useQuery({
-    queryKey: ['people'],
+    queryKey: ['person'],
     queryFn: async () => {
-      const data = await getPeople(limit);
+      const data = await searchPeople(query);
       return data.map(translatePeopleAttributes);
     },
   });

@@ -7,7 +7,7 @@ const translations = {
     skin_color: 'color_de_piel',
     eye_color: 'color_de_ojos',
     birth_year: 'año_de_nacimiento',
-    gender: 'género',
+    gender: 'genero',
   },
   films: {
     title: 'titulo',
@@ -18,10 +18,10 @@ const translations = {
   planets: {
     name: 'nombre',
     climate: 'clima',
-    diameter: 'diámetro',
+    diameter: 'diametro',
     gravity: 'gravedad',
     orbital_period: 'periodo_orbital',
-    population: 'población',
+    population: 'poblacion',
     terrain: 'terreno',
   },
 };
