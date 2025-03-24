@@ -1,8 +1,8 @@
 import {Text, View} from 'react-native';
-import {usePeople} from '../hooks';
+import {useGetPeople} from '../hooks';
 
 export const SearchScreen = () => {
-  const {data, isLoading, isError} = usePeople();
+  const {data, isLoading, isError} = useGetPeople();
 
   return (
     <View>
