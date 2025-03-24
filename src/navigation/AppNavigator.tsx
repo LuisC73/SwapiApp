@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {HomeScreen, SearchScreen, DetailScreen} from '../screens';
 import {Icon} from '../components';
+import {IconProp} from '@fortawesome/fontawesome-svg-core';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -18,7 +19,9 @@ const renderTabBarIcon =
       iconName = 'search';
     }
 
-    return <Icon name={iconName} size={size} color={color} />;
+    return (
+      <Icon name={(iconName as IconProp) ?? ''} size={size} color={color} />
+    );
   };
 
 const HomeTabs = () => {
