@@ -14,7 +14,6 @@ import {
 } from '../hooks';
 import {Card, TouchableCard} from '../components';
 import {FilmsData, PeopleData, PlanetsData} from '../types';
-import {spacing} from '../styles/theme';
 
 export const HomeScreen = ({navigation}: {navigation: any}) => {
   const {
@@ -33,7 +32,7 @@ export const HomeScreen = ({navigation}: {navigation: any}) => {
     isError: isErrorPlanets,
   } = useGetPlanets();
 
-  const {globalStyles} = useThemeStyles();
+  const {spacing, globalStyles} = useThemeStyles();
 
   if (isLoadingPeople || isLoadingFilms || isLoadingPlanets) {
     return <ActivityIndicator size="large" />;
@@ -46,8 +45,9 @@ export const HomeScreen = ({navigation}: {navigation: any}) => {
   const localStyles = StyleSheet.create({
     scrollView: {
       flexDirection: 'column',
-      gap: 40,
-      padding: spacing.medium,
+      gap: spacing.medium,
+      padding: spacing.large,
+      paddingTop: 0,
     },
   });
 
@@ -60,64 +60,57 @@ export const HomeScreen = ({navigation}: {navigation: any}) => {
             title={person?.nombre}
             onPress={() => navigation.navigate('Detalles', {item: person})}>
             <>
-              <Text style={globalStyles.textBody}>
-                Altura: {person?.altura} cm
-              </Text>
-              <Text style={globalStyles.textBody}>Masa: {person?.masa}</Text>
-              <Text style={globalStyles.textBody}>
+              <Text style={globalStyles.text}>Tipo: Personaje</Text>
+              <Text style={globalStyles.text}>Altura: {person?.altura} cm</Text>
+              <Text style={globalStyles.text}>Masa: {person?.masa}</Text>
+              <Text style={globalStyles.text}>
                 Año de nacimiento: {person?.año_de_nacimiento}
               </Text>
-              <Text style={globalStyles.textBody}>
-                Género: {person?.genero}
-              </Text>
-              <Text style={globalStyles.textBody}>
+              <Text style={globalStyles.text}>Género: {person?.genero}</Text>
+              <Text style={globalStyles.text}>
                 Color de cabello: {person?.color_de_cabello}
               </Text>
-              <Text style={globalStyles.textBody}>
+              <Text style={globalStyles.text}>
                 Color de piel: {person?.color_de_piel}
               </Text>
-              <Text style={globalStyles.textBody}>
+              <Text style={globalStyles.text}>
                 Color de ojos: {person?.color_de_ojos}
               </Text>
             </>
           </TouchableCard>
         ))}
         {films.map((film: FilmsData, index: number) => (
-          <Card key={index} title={'Film'}>
+          <Card key={index} title={film?.titulo}>
             <>
-              <Text style={globalStyles.textBody}>Titulo: {film?.titulo}</Text>
-              <Text style={globalStyles.textBody}>Creado: {film?.creado}</Text>
-              <Text style={globalStyles.textBody}>
-                Director: {film?.director}
+              <Text style={globalStyles.text}>Tipo: Pelicula</Text>
+              <Text style={globalStyles.text}>
+                Creado: {new Date(film?.creado).toLocaleDateString()}
               </Text>
-              <Text style={globalStyles.textBody}>
+              <Text style={globalStyles.text}>Director: {film?.director}</Text>
+              <Text style={globalStyles.text}>
                 Productor: {film?.productor}
               </Text>
             </>
           </Card>
         ))}
         {planets.map((planet: PlanetsData, index: number) => (
-          <Card key={index} title={'Planet'}>
+          <Card key={index} title={planet?.nombre}>
             <>
-              <Text style={globalStyles.textBody}>
-                Nombre: {planet?.nombre}
-              </Text>
-              <Text style={globalStyles.textBody}>Clima: {planet?.clima}</Text>
-              <Text style={globalStyles.textBody}>
+              <Text style={globalStyles.text}>Tipo: Planeta</Text>
+              <Text style={globalStyles.text}>Clima: {planet?.clima}</Text>
+              <Text style={globalStyles.text}>
                 Diametro: {planet?.diametro}
               </Text>
-              <Text style={globalStyles.textBody}>
+              <Text style={globalStyles.text}>
                 Gravedad: {planet?.gravedad}
               </Text>
-              <Text style={globalStyles.textBody}>
+              <Text style={globalStyles.text}>
                 Periodo orbital: {planet?.periodo_orbital}
               </Text>
-              <Text style={globalStyles.textBody}>
+              <Text style={globalStyles.text}>
                 Población: {planet?.poblacion}
               </Text>
-              <Text style={globalStyles.textBody}>
-                Terreno: {planet?.terreno}
-              </Text>
+              <Text style={globalStyles.text}>Terreno: {planet?.terreno}</Text>
             </>
           </Card>
         ))}

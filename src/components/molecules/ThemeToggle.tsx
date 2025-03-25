@@ -5,19 +5,20 @@ import {useThemeStyles} from '../../hooks';
 
 export const ThemeToggle = () => {
   const {resolvedTheme, toggleTheme} = useTheme();
-  const {globalStyles} = useThemeStyles();
+  const {spacing, globalStyles} = useThemeStyles();
 
   const localStyles = StyleSheet.create({
     toggleContainer: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
+      gap: spacing.small,
     },
   });
 
   return (
     <View style={localStyles.toggleContainer}>
-      <Text style={globalStyles.textBody}>Modo Oscuro</Text>
+      <Text style={globalStyles.text}>Modo Oscuro</Text>
       <Switch
         value={resolvedTheme === 'dark'}
         onValueChange={toggleTheme}

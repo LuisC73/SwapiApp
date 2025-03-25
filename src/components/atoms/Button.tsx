@@ -2,12 +2,13 @@ import {Pressable, StyleSheet, Text} from 'react-native';
 import {ButtonProps} from '../../types';
 import {useThemeStyles} from '../../hooks';
 
-export const Button = ({text, onPress}: ButtonProps) => {
-  const {colors, globalStyles} = useThemeStyles();
+export const Button = ({width, text, onPress}: ButtonProps) => {
+  const {colors, spacing, globalStyles} = useThemeStyles();
 
   const localStyles = StyleSheet.create({
     button: {
-      padding: 10,
+      width: width ?? 'auto',
+      padding: spacing.small,
       borderWidth: 1,
       borderRadius: 5,
       borderColor: colors.primary,
@@ -17,7 +18,7 @@ export const Button = ({text, onPress}: ButtonProps) => {
 
   return (
     <Pressable onPress={onPress} style={localStyles.button}>
-      <Text style={globalStyles.textBody}>{text}</Text>
+      <Text style={globalStyles.buttonText}>{text}</Text>
     </Pressable>
   );
 };

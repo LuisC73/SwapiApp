@@ -1,15 +1,17 @@
 export const lightColors = {
   background: '#ffffff',
   text: '#2c3e50',
-  primary: '#3498db',
-  secondary: '#121212',
+  placeholder: '#6B7280',
+  primary: '#000',
+  secondary: '#00000060',
 };
 
 export const darkColors = {
   background: '#121212',
   text: '#ecf0f1',
-  primary: '#2980b9',
-  secondary: '#2c3e50',
+  placeholder: '#d5d7db',
+  primary: '#E4AD19',
+  secondary: '#E4AD1960',
 };
 
 export const spacing = {

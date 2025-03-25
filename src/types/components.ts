@@ -1,7 +1,9 @@
 import {IconProp} from '@fortawesome/fontawesome-svg-core';
+import { DimensionValue } from 'react-native';
 
 // atoms
 export interface ButtonProps {
+  width?: DimensionValue;
   text: string;
   onPress: () => void;
 }
@@ -13,6 +15,7 @@ export interface IconProps {
 }
 
 export interface InputProps {
+  width?: DimensionValue;
   placeholder: string;
   value: string;
   onChangeText: (text: string) => void;

@@ -15,9 +15,22 @@ export const useThemeStyles = () => {
         flex: 1,
         backgroundColor: colors.background,
       },
-      textBody: {
-        fontSize: 16,
+      text: {
+        fontSize: 14,
+        fontFamily: 'Nunito-Regular',
         color: colors.text,
+      },
+      title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        fontFamily: 'Nunito-Bold',
+        color: colors.primary,
+      },
+      buttonText: {
+        fontSize: 14,
+        fontFamily: 'Nunito-Regular',
+        textAlign: 'center',
+        color: colors.background,
       },
     }),
   };
