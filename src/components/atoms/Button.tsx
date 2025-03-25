@@ -14,10 +14,18 @@ export const Button = ({width, text, onPress}: ButtonProps) => {
       borderColor: colors.primary,
       backgroundColor: colors.primary,
     },
+    pressedButton: {
+      backgroundColor: colors.secondary,
+    },
   });
 
   return (
-    <Pressable onPress={onPress} style={localStyles.button}>
+    <Pressable
+      onPress={onPress}
+      style={({pressed}) => [
+        localStyles.button,
+        pressed && localStyles.pressedButton,
+      ]}>
       <Text style={globalStyles.buttonText}>{text}</Text>
     </Pressable>
   );
