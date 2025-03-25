@@ -1,97 +1,106 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# SwapiApp 🚀
 
-# Getting Started
+[![React Native](https://img.shields.io/badge/React%20Native-0.71-blue)](https://reactnative.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-4.9%2B-blue)](https://www.typescriptlang.org/)
+[![React Query](https://img.shields.io/badge/React%20Query-4.0%2B-orange)](https://tanstack.com/query/v4)
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+Aplicación móvil que consume la API SWAPI para mostrar personajes, películas y planetas de Star Wars, con soporte para tema oscuro/claro y navegación fluida.
 
-## Step 1: Start Metro
+## 📱 Capturas de Pantalla
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+| Modo Claro                      | Modo Oscuro                   |
+| ------------------------------- | ----------------------------- |
+| ![Light](screenshots/light.jpg) | ![Dark](screenshots/dark.jpg) |
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## ✨ Características Principales
 
-```sh
-# Using npm
-npm start
+- **Integración con SWAPI**: Datos reales de Star Wars
+- **Tema Dinámico**: Cambio entre modo claro/oscuro
+- **Navegación Avanzada**: Stack + Bottom Tabs
+- **Arquitectura Limpia**: Atomic Design + TypeScript
+- **Renderizado Optimizado**: FlatList + React Query
 
-# OR using Yarn
-yarn start
+## 🛠 Tecnologías Clave
+
+| Tecnología          | Uso                         |
+| ------------------- | --------------------------- |
+| React Native CLI    | Base del proyecto           |
+| TypeScript          | Tipado estático             |
+| React Navigation v6 | Navegación                  |
+| React Query v4      | Gestión de datos/cache      |
+| Atomic Design       | Organización de componentes |
+| SWAPI               | Fuente de datos             |
+
+## 🚀 Instalación
+
+1. Clona el repositorio:
+
+```bash
+git clone https://github.com/tu-usuario/star-wars-app.git
 ```
 
-## Step 2: Build and run your app
+2. Instala dependencias:
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+```bash
+cd SwapiAPp
+npm install
+# o
+yarn install
 ```
 
-### iOS
+3. Ejecuta en iOS/Android:
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+```bash
+npx react-native run-android
+# o
+npx react-native run-ios
 ```
 
-Then, and every time you update your native dependencies, run:
+## 🏗 Estructura del Proyecto
 
-```sh
-bundle exec pod install
+```folder
+src/
+├── api/               # Llamadas a SWAPI
+├── components/        # Componentes (Atomic Design)
+│   ├── atoms
+│   ├── molecules
+│   └── organisms
+│   └── templates
+├── contexts/          # Contextos (Tema, etc.)
+├── hooks/             # Hooks personalizados
+├── navigation/        # Configuración de rutas
+├── screens/           # Pantallas
+├── styles/            # Estilos/themes
+├── types/             # Tipos TypeScript
+└── utils/             # Utilidades
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+## 📚 Documentación Adicional
 
-```sh
-# Using npm
-npm run ios
+- [SWAPI Documentation](https://swapi.py4e.com/documentation)
 
-# OR using Yarn
-yarn ios
-```
+- [React Navigation Docs](https://reactnavigation.org/)
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+- [React Query Guide](https://tanstack.com/query/v4/docs/framework/react/overview)
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+🤝 Contribución
 
-## Step 3: Modify your app
+1. Haz fork del proyecto
 
-Now that you have successfully run the app, let's make changes!
+2. Crea tu rama `(git checkout -b feature/nueva-funcionalidad)`
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+3. Haz commit de tus cambios `(git commit -m 'Add some feature')`
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+4. Haz push a la rama `(git push origin feature/nueva-funcionalidad)`
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+5. Abre un Pull Request
 
-## Congratulations! :tada:
+📄 Licencia
 
-You've successfully run and modified your React Native App. :partying_face:
+MIT © Luis Miguel Castro
 
-### Now what?
+## Autor
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- Linkedin - [@luismiguelcc](https://www.linkedin.com/in/luismiguelcc/)
+- Portafolio - [miguelcastroc.com](https://www.miguelcastroc.com/)
+- Correo - [miguelcastroweb@gmail.com](mailto:miguelcastroweb@gmail.com)
