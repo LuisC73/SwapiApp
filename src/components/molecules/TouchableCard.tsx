@@ -12,9 +12,7 @@ export const TouchableCard = ({
     <View style={styles.card}>
       {title && <Text>{title}</Text>}
       <View>{children}</View>
-      <View>
-        <Button text="Ver detalle" onPress={onPress} />
-      </View>
+      <Button text="Ver detalles" onPress={onPress} />
     </View>
   );
 };

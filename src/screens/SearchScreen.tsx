@@ -1,17 +1,12 @@
-import {
-  ActivityIndicator,
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import {useSearchPerson} from '../hooks';
+import {ActivityIndicator, FlatList, Text, View} from 'react-native';
+import {useSearchPerson, useThemeStyles} from '../hooks';
 import {SearchInput, TouchableCard} from '../components';
 import {useState} from 'react';
 
 export const SearchScreen = ({navigation}: {navigation: any}) => {
   const [searchQuery, setSearchQuery] = useState('');
   const {data, isLoading, isError, refetch} = useSearchPerson(searchQuery);
+  const {globalStyles} = useThemeStyles();
 
   const handleSearch = () => {
     if (searchQuery.trim().length > 0) {
@@ -28,8 +23,7 @@ export const SearchScreen = ({navigation}: {navigation: any}) => {
   }
 
   return (
-    <View>
-      <Text style={styles.title}>Search Screen</Text>
+    <View style={globalStyles.screenContainer}>
       <SearchInput
         input={{
           value: searchQuery,
@@ -46,15 +40,23 @@ export const SearchScreen = ({navigation}: {navigation: any}) => {
         renderItem={({item}) => (
           <TouchableCard
             title={item?.nombre}
-            onPress={() => navigation.navigate('Detail', {item})}>
+            onPress={() => navigation.navigate('Detalles', {item})}>
             <>
-              <Text>Altura: {item?.altura}</Text>
-              <Text>Masa: {item?.masa}</Text>
-              <Text>Año de nacimiento: {item?.año_de_nacimiento}</Text>
-              <Text>Género: {item?.genero}</Text>
-              <Text>Color de cabello: {item?.color_de_cabello}</Text>
-              <Text>Color de piel: {item?.color_de_piel}</Text>
-              <Text>Color de ojos: {item?.color_de_ojos}</Text>
+              <Text style={globalStyles.textBody}>Altura: {item?.altura}</Text>
+              <Text style={globalStyles.textBody}>Masa: {item?.masa}</Text>
+              <Text style={globalStyles.textBody}>
+                Año de nacimiento: {item?.año_de_nacimiento}
+              </Text>
+              <Text style={globalStyles.textBody}>Género: {item?.genero}</Text>
+              <Text style={globalStyles.textBody}>
+                Color de cabello: {item?.color_de_cabello}
+              </Text>
+              <Text style={globalStyles.textBody}>
+                Color de piel: {item?.color_de_piel}
+              </Text>
+              <Text style={globalStyles.textBody}>
+                Color de ojos: {item?.color_de_ojos}
+              </Text>
             </>
           </TouchableCard>
         )}
@@ -63,11 +65,3 @@ export const SearchScreen = ({navigation}: {navigation: any}) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  title: {},
-  text: {
-    fontSize: 20,
-    color: '#fff',
-  },
-});

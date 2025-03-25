@@ -2,7 +2,7 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {HomeScreen, SearchScreen, DetailScreen} from '../screens';
-import {Icon} from '../components';
+import {Header, Icon} from '../components';
 import {IconProp} from '@fortawesome/fontawesome-svg-core';
 
 const Stack = createStackNavigator();
@@ -13,9 +13,9 @@ const renderTabBarIcon =
   ({color, size}: {color: string; size: number}) => {
     let iconName;
 
-    if (route.name === 'Home') {
+    if (route.name === 'Inicio') {
       iconName = 'home';
-    } else if (route.name === 'Search') {
+    } else if (route.name === 'Buscar') {
       iconName = 'search';
     }
 
@@ -24,6 +24,8 @@ const renderTabBarIcon =
     );
   };
 
+const renderHeader = () => <Header />;
+
 const HomeTabs = () => {
   return (
     <Tab.Navigator
@@ -31,9 +33,10 @@ const HomeTabs = () => {
         tabBarIcon: renderTabBarIcon(route),
         tabBarActiveTintColor: 'tomato',
         tabBarInactiveTintColor: 'blue',
+        header: renderHeader,
       })}>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Search" component={SearchScreen} />
+      <Tab.Screen name="Inicio" component={HomeScreen} />
+      <Tab.Screen name="Buscar" component={SearchScreen} />
     </Tab.Navigator>
   );
 };
@@ -46,7 +49,11 @@ export const AppNavigator: React.FC = () => {
         component={HomeTabs}
         options={{headerShown: false}}
       />
-      <Stack.Screen name="Detail" component={DetailScreen} />
+      <Stack.Screen
+        name="Detalles"
+        component={DetailScreen}
+        options={{title: 'Detalles del Personaje'}}
+      />
     </Stack.Navigator>
   );
 };

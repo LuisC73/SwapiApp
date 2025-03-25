@@ -14,5 +14,8 @@ export const Input = ({placeholder, value, onChangeText}: InputProps) => {
 };
 
 const styles = StyleSheet.create({
-  input: {},
+  input: {
+    width: '100%',
+    padding: 10,
+  },
 });
