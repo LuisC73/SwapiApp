@@ -45,7 +45,7 @@ export interface PersonType {
 }
 
 export interface FilmType {
-  id_episodio: string;
+  id_episodio: number;
   titulo: string;
   creado: string;
   director: string;
