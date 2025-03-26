@@ -19,6 +19,7 @@ export const Input = ({
       borderRadius: 5,
       borderColor: colors.primary,
       backgroundColor: colors.background,
+      color: colors.text,
     },
   });
 

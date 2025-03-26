@@ -5,22 +5,43 @@ import {
   Text,
   View,
 } from 'react-native';
-import {useSearchPerson, useThemeStyles} from '../hooks';
+import {useFetchPeople, useSearchPeople, useThemeStyles} from '../hooks';
 import {SearchInput, TouchableCard} from '../components';
 import {useState} from 'react';
 
 export const SearchScreen = ({navigation}: {navigation: any}) => {
+  const {data: initialData, isLoading: isLoadingInitial} = useFetchPeople(10);
   const [searchQuery, setSearchQuery] = useState('');
-  const {data, isLoading, isError, refetch} = useSearchPerson(searchQuery);
+
+  const {
+    searchResults,
+    isLoading: isSearchLoading,
+    isError,
+    search,
+    clearSearch,
+  } = useSearchPeople();
+
   const {spacing, globalStyles} = useThemeStyles();
 
   const handleSearch = () => {
     if (searchQuery.trim().length > 0) {
-      refetch();
+      search(searchQuery);
     }
   };
 
-  if (isLoading) {
+  const handleInputChange = (text: string) => {
+    setSearchQuery(text);
+    if (text.trim().length === 0) {
+      clearSearch();
+    }
+  };
+
+  const displayedData =
+    searchQuery.trim() && searchResults.length > 0
+      ? searchResults
+      : initialData || [];
+
+  if (isLoadingInitial || isSearchLoading) {
     return <ActivityIndicator size="large" />;
   }
 
@@ -48,7 +69,7 @@ export const SearchScreen = ({navigation}: {navigation: any}) => {
           input={{
             value: searchQuery,
             placeholder: 'Buscar Personaje',
-            onChangeText: (text: string) => setSearchQuery(text),
+            onChangeText: handleInputChange,
           }}
           button={{
             text: 'Buscar',
@@ -56,9 +77,10 @@ export const SearchScreen = ({navigation}: {navigation: any}) => {
           }}
         />
       </View>
+      <Text style={globalStyles.text}>{JSON.stringify(searchResults)}</Text>
       <FlatList
-        style={localStyles.scrollView}
-        data={data}
+        contentContainerStyle={localStyles.scrollView}
+        data={displayedData}
         renderItem={({item}) => (
           <TouchableCard
             title={item?.nombre}
@@ -84,6 +106,9 @@ export const SearchScreen = ({navigation}: {navigation: any}) => {
           </TouchableCard>
         )}
         keyExtractor={(item, index) => index.toString()}
+        ListEmptyComponent={
+          <Text style={globalStyles.text}>No se encontraron resultados</Text>
+        }
       />
     </View>
   );

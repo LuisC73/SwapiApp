@@ -1,3 +1,5 @@
+import {FilmType, PersonType, PlanetType} from '../types';
+
 const translations = {
   people: {
     name: 'nombre',
@@ -8,6 +10,7 @@ const translations = {
     eye_color: 'color_de_ojos',
     birth_year: 'año_de_nacimiento',
     gender: 'genero',
+    homeworld: 'planeta_natal',
   },
   films: {
     title: 'titulo',
@@ -24,20 +27,31 @@ const translations = {
     population: 'poblacion',
     terrain: 'terreno',
   },
-};
+} as const;
 
-const translateAttributes = <T extends Record<string, any>>(
-  data: T,
-  type: keyof typeof translations,
-): Record<string, any> => {
-  const translationMap = translations[type] as Record<string, string>;
+type ResourceType = keyof typeof translations;
 
-  return Object.keys(data).reduce((acc, key) => {
-    const translatedKey = translationMap[key] || key;
-    acc[translatedKey] = data[key];
+function translateAttributes<T extends ResourceType>(
+  data: any,
+  type: T,
+): T extends 'people'
+  ? PersonType
+  : T extends 'planets'
+  ? PlanetType
+  : T extends 'films'
+  ? FilmType
+  : never {
+  const translationMap = translations[type];
+
+  const result = Object.entries(data).reduce((acc, [key, value]) => {
+    const translatedKey =
+      translationMap[key as keyof typeof translationMap] || key;
+    acc[translatedKey] = value;
     return acc;
-  }, {} as Record<string, any>);
-};
+  }, {} as any);
+
+  return result;
+}
 
 export const translatePeopleAttributes = (data: any) => {
   return translateAttributes(data, 'people');

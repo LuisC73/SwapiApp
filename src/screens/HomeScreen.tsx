@@ -7,30 +7,30 @@ import {
   View,
 } from 'react-native';
 import {
-  useGetPeople,
-  useGetFilms,
-  useGetPlanets,
+  useFetchPeople,
+  useFetchFilms,
+  useFetchPlanets,
   useThemeStyles,
 } from '../hooks';
+import {FilmType, PersonType, PlanetType} from '../types';
 import {Card, TouchableCard} from '../components';
-import {FilmsData, PeopleData, PlanetsData} from '../types';
 
 export const HomeScreen = ({navigation}: {navigation: any}) => {
   const {
     data: people,
     isLoading: isLoadingPeople,
     isError: isErrorPeople,
-  } = useGetPeople();
+  } = useFetchPeople();
   const {
     data: films,
     isLoading: isLoadingFilms,
     isError: isErrorFilms,
-  } = useGetFilms();
+  } = useFetchFilms();
   const {
     data: planets,
     isLoading: isLoadingPlanets,
     isError: isErrorPlanets,
-  } = useGetPlanets();
+  } = useFetchPlanets();
 
   const {spacing, globalStyles} = useThemeStyles();
 
@@ -53,8 +53,8 @@ export const HomeScreen = ({navigation}: {navigation: any}) => {
 
   return (
     <View style={globalStyles.screenContainer}>
-      <ScrollView style={localStyles.scrollView}>
-        {people.map((person: PeopleData, index: number) => (
+      <ScrollView contentContainerStyle={localStyles.scrollView}>
+        {people?.map((person: PersonType, index: number) => (
           <TouchableCard
             key={index}
             title={person?.nombre}
@@ -79,7 +79,7 @@ export const HomeScreen = ({navigation}: {navigation: any}) => {
             </>
           </TouchableCard>
         ))}
-        {films.map((film: FilmsData, index: number) => (
+        {films?.map((film: FilmType, index: number) => (
           <Card key={index} title={film?.titulo}>
             <>
               <Text style={globalStyles.text}>Tipo: Pelicula</Text>
@@ -93,7 +93,7 @@ export const HomeScreen = ({navigation}: {navigation: any}) => {
             </>
           </Card>
         ))}
-        {planets.map((planet: PlanetsData, index: number) => (
+        {planets?.map((planet: PlanetType, index: number) => (
           <Card key={index} title={planet?.nombre}>
             <>
               <Text style={globalStyles.text}>Tipo: Planeta</Text>

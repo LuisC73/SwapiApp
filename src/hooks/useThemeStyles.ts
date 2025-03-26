@@ -26,6 +26,12 @@ export const useThemeStyles = () => {
         fontFamily: 'Nunito-Bold',
         color: colors.primary,
       },
+      subtitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        fontFamily: 'Nunito-Bold',
+        color: colors.primary,
+      },
       buttonText: {
         fontSize: 14,
         fontFamily: 'Nunito-Regular',
