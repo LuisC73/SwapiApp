@@ -8,5 +8,4 @@
 
 - Cada componente tiene:
   - Archivo principal (.tsx)
-  - Estilos (.styles.ts)
   - Tipos (.types.ts)
