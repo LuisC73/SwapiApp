@@ -42,7 +42,7 @@ git clone git@github.com:LuisC73/SwapiApp.git
 2. Instala dependencias:
 
 ```bash
-cd SwapiAPp
+cd SwapiApp
 npm install
 # o
 yarn install
