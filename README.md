@@ -10,7 +10,7 @@ Aplicación móvil que consume la API SWAPI para mostrar personajes, películas 
 
 | Modo Claro                      | Modo Oscuro                   |
 | ------------------------------- | ----------------------------- |
-| ![Light](screenshots/light.jpg) | ![Dark](screenshots/dark.jpg) |
+| ![Light](https://github.com/user-attachments/assets/0f110bc9-a1cc-49bc-b8cc-c2ef2e8003ee) | ![Dark](https://github.com/user-attachments/assets/26526d09-664f-4c7d-a082-b0b92fa3a37b) |
 
 ## ✨ Características Principales
 
