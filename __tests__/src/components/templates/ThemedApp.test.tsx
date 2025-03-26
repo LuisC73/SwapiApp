@@ -1,1 +1,5 @@
-describe('Pruebas en el componente <ThemedApp />', () => {});
+describe('Pruebas en el componente <ThemedApp />', () => {
+  test('should first', () => {
+    expect(2).toBe(2);
+  });
+});
