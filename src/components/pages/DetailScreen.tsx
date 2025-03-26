@@ -6,7 +6,11 @@ import {
   Text,
   View,
 } from 'react-native';
-import {useFetchFilmById, useFetchPlanetById, useThemeStyles} from '../hooks';
+import {
+  useFetchFilmById,
+  useFetchPlanetById,
+  useThemeStyles,
+} from '../../hooks';
 
 const extractIdFromUrl = (url: string) => {
   const parts = url.split('/');

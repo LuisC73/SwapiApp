@@ -11,9 +11,9 @@ import {
   useFetchFilms,
   useFetchPlanets,
   useThemeStyles,
-} from '../hooks';
-import {FilmType, PersonType, PlanetType} from '../types';
-import {Card, TouchableCard} from '../components';
+} from '../../hooks';
+import {FilmType, PersonType, PlanetType} from '../../types';
+import {Card, TouchableCard} from '../molecules';
 
 export const HomeScreen = ({navigation}: {navigation: any}) => {
   const {

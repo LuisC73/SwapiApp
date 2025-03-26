@@ -5,8 +5,8 @@ import {
   Text,
   View,
 } from 'react-native';
-import {useFetchPeople, useSearchPeople, useThemeStyles} from '../hooks';
-import {SearchInput, TouchableCard} from '../components';
+import {useFetchPeople, useSearchPeople, useThemeStyles} from '../../hooks';
+import {SearchInput, TouchableCard} from '../molecules';
 import {useState} from 'react';
 
 export const SearchScreen = ({navigation}: {navigation: any}) => {
