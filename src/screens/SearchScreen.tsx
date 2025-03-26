@@ -10,13 +10,17 @@ import {SearchInput, TouchableCard} from '../components';
 import {useState} from 'react';
 
 export const SearchScreen = ({navigation}: {navigation: any}) => {
-  const {data: initialData, isLoading: isLoadingInitial} = useFetchPeople(10);
+  const {
+    data: initialData,
+    isLoading: isLoadingInitial,
+    isError: isErrorInitial,
+  } = useFetchPeople(10);
   const [searchQuery, setSearchQuery] = useState('');
 
   const {
     searchResults,
-    isLoading: isSearchLoading,
-    isError,
+    isLoading: isLoadingSearch,
+    isError: isErrorSearch,
     search,
     clearSearch,
   } = useSearchPeople();
@@ -41,14 +45,6 @@ export const SearchScreen = ({navigation}: {navigation: any}) => {
       ? searchResults
       : initialData || [];
 
-  if (isLoadingInitial || isSearchLoading) {
-    return <ActivityIndicator size="large" />;
-  }
-
-  if (isError) {
-    return <Text>Error al cargar los datos</Text>;
-  }
-
   const localStyles = StyleSheet.create({
     searchContainer: {
       paddingTop: spacing.medium,
@@ -61,6 +57,22 @@ export const SearchScreen = ({navigation}: {navigation: any}) => {
       paddingTop: 0,
     },
   });
+
+  if (isLoadingInitial || isLoadingSearch) {
+    return (
+      <View style={globalStyles.centerContent}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
+  if (isErrorInitial) {
+    return (
+      <View style={globalStyles.centerContent}>
+        <Text style={globalStyles.errorText}>Error al cargar los datos</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={globalStyles.screenContainer}>
@@ -77,7 +89,6 @@ export const SearchScreen = ({navigation}: {navigation: any}) => {
           }}
         />
       </View>
-      <Text style={globalStyles.text}>{JSON.stringify(searchResults)}</Text>
       <FlatList
         contentContainerStyle={localStyles.scrollView}
         data={displayedData}
@@ -86,9 +97,8 @@ export const SearchScreen = ({navigation}: {navigation: any}) => {
             title={item?.nombre}
             onPress={() => navigation.navigate('Detalles', {item})}>
             <>
-              <Text style={globalStyles.text}>Tipo: Personaje</Text>
               <Text style={globalStyles.text}>Altura: {item?.altura} cm</Text>
-              <Text style={globalStyles.text}>Masa: {item?.masa}</Text>
+              <Text style={globalStyles.text}>Masa: {item?.masa} kg</Text>
               <Text style={globalStyles.text}>
                 Año de nacimiento: {item?.año_de_nacimiento}
               </Text>
@@ -107,9 +117,14 @@ export const SearchScreen = ({navigation}: {navigation: any}) => {
         )}
         keyExtractor={(item, index) => index.toString()}
         ListEmptyComponent={
-          <Text style={globalStyles.text}>No se encontraron resultados</Text>
+          <Text style={globalStyles.errorText}>
+            No se encontraron resultados
+          </Text>
         }
       />
+      {isErrorSearch && (
+        <Text style={globalStyles.errorText}>No se encontraron resultados</Text>
+      )}
     </View>
   );
 };

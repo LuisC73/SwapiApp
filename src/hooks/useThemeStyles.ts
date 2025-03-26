@@ -15,6 +15,11 @@ export const useThemeStyles = () => {
         flex: 1,
         backgroundColor: colors.background,
       },
+      centerContent: {
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
       text: {
         fontSize: 14,
         fontFamily: 'Nunito-Regular',
@@ -37,6 +42,20 @@ export const useThemeStyles = () => {
         fontFamily: 'Nunito-Regular',
         textAlign: 'center',
         color: colors.background,
+      },
+      errorText: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        fontFamily: 'Nunito-Bold',
+        textAlign: 'center',
+        color: colors.error,
+      },
+      infoText: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        fontFamily: 'Nunito-Bold',
+        textAlign: 'center',
+        color: colors.info,
       },
     }),
   };

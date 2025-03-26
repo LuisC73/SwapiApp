@@ -18,14 +18,18 @@ export const DetailScreen = ({route}: {route: any}) => {
   const planetId: string = extractIdFromUrl(item?.planeta_natal);
   const filmIds: string[] = item?.films.map(extractIdFromUrl);
 
-  const {data: planet, isLoading: isLoadingPlanet} =
-    useFetchPlanetById(planetId);
-  const {data: films, isLoading: isLoadingFilms} = useFetchFilmById(filmIds);
-  const {spacing, globalStyles} = useThemeStyles();
+  const {
+    data: planet,
+    isLoading: isLoadingPlanet,
+    isError: isErrorPlanet,
+  } = useFetchPlanetById(planetId);
+  const {
+    data: films,
+    isLoading: isLoadingFilms,
+    isError: isErrorFilms,
+  } = useFetchFilmById(filmIds);
 
-  if (isLoadingPlanet || isLoadingFilms) {
-    return <ActivityIndicator size="large" />;
-  }
+  const {spacing, globalStyles} = useThemeStyles();
 
   const localStyles = StyleSheet.create({
     container: {
@@ -43,6 +47,12 @@ export const DetailScreen = ({route}: {route: any}) => {
       gap: spacing.medium,
     },
   });
+
+  if (isLoadingFilms || isLoadingPlanet || isLoadingFilms) {
+    <View style={globalStyles.centerContent}>
+      <ActivityIndicator size="large" />
+    </View>;
+  }
 
   return (
     <View style={globalStyles.screenContainer}>
@@ -69,44 +79,60 @@ export const DetailScreen = ({route}: {route: any}) => {
           </Text>
         </View>
 
-        <View style={localStyles.section}>
-          <Text style={globalStyles.subtitle}>Planeta Natal</Text>
-          {planet ? (
-            <View>
-              <Text style={globalStyles.text}>Nombre: {planet.nombre}</Text>
-              <Text style={globalStyles.text}>Clima: {planet.clima}</Text>
-              <Text style={globalStyles.text}>
-                Población: {planet.poblacion}
-              </Text>
-              <Text style={globalStyles.text}>Terreno: {planet.terreno}</Text>
+        {!isErrorPlanet ? (
+          planet ? (
+            <View style={localStyles.section}>
+              <Text style={globalStyles.subtitle}>Planeta Natal</Text>
+              <View>
+                <Text style={globalStyles.text}>Nombre: {planet.nombre}</Text>
+                <Text style={globalStyles.text}>Clima: {planet.clima}</Text>
+                <Text style={globalStyles.text}>
+                  Población: {planet.poblacion}
+                </Text>
+                <Text style={globalStyles.text}>Terreno: {planet.terreno}</Text>
+              </View>
             </View>
           ) : (
-            <Text style={globalStyles.text}>
-              No se pudo cargar información del planeta
+            <Text style={globalStyles.infoText}>
+              No hay información del planeta
             </Text>
-          )}
-        </View>
+          )
+        ) : (
+          <Text style={globalStyles.errorText}>
+            Error al cargar la información del planeta
+          </Text>
+        )}
 
-        {films && films.length > 0 && (
-          <View style={localStyles.section}>
-            <Text style={globalStyles.subtitle}>Peliculas donde aparece</Text>
-            <View style={localStyles.scrollView}>
-              {films?.map((film, index) => (
-                <View key={index}>
-                  <Text style={globalStyles.text}>Titulo: {film.titulo}</Text>
-                  <Text style={globalStyles.text}>
-                    Creado: {new Date(film.creado).toLocaleDateString()}
-                  </Text>
-                  <Text style={globalStyles.text}>
-                    Director: {film.director}
-                  </Text>
-                  <Text style={globalStyles.text}>
-                    Productor: {film.productor}
-                  </Text>
-                </View>
-              ))}
+        {!isErrorFilms ? (
+          films && films.length > 0 ? (
+            <View style={localStyles.section}>
+              <Text style={globalStyles.subtitle}>Peliculas donde aparece</Text>
+              <View style={localStyles.scrollView}>
+                {films?.map((film, index) => (
+                  <View key={index}>
+                    <Text style={globalStyles.text}>Titulo: {film.titulo}</Text>
+                    <Text style={globalStyles.text}>
+                      Creado: {new Date(film.creado).toLocaleDateString()}
+                    </Text>
+                    <Text style={globalStyles.text}>
+                      Director: {film.director}
+                    </Text>
+                    <Text style={globalStyles.text}>
+                      Productor: {film.productor}
+                    </Text>
+                  </View>
+                ))}
+              </View>
             </View>
-          </View>
+          ) : (
+            <Text style={globalStyles.infoText}>
+              No hay peliculas disponibles
+            </Text>
+          )
+        ) : (
+          <Text style={globalStyles.errorText}>
+            Error al cargar los datos de las peliculas
+          </Text>
         )}
       </ScrollView>
     </View>
