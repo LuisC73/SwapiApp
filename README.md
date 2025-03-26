@@ -54,6 +54,8 @@ yarn install
 npx react-native run-android
 # o
 npx react-native run-ios
+# luego ejecutar el siguiente comando
+npx react-native start
 ```
 
 ## 🏗 Estructura del Proyecto
@@ -66,10 +68,10 @@ src/
 │   ├── molecules
 │   └── organisms
 │   └── templates
+│   └── pages          # Pantallas
 ├── contexts/          # Contextos (Tema, etc.)
 ├── hooks/             # Hooks personalizados
 ├── navigation/        # Configuración de rutas
-├── screens/           # Pantallas
 ├── styles/            # Estilos/themes
 ├── types/             # Tipos TypeScript
 └── utils/             # Utilidades
