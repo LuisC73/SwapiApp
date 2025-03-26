@@ -2,10 +2,10 @@ import {FilmType, PersonType, PlanetType, SWAPIResponse} from '../types';
 
 const SWAPI_BASE_URL = 'https://swapi.py4e.com/api';
 
-async function fetchSwapiResource<T>(
+const fetchSwapiResource = async <T>(
   endpoint: string,
   searchQuery?: string,
-): Promise<T> {
+): Promise<T> => {
   const url = new URL(`${SWAPI_BASE_URL}/${endpoint}`);
 
   if (searchQuery) {
@@ -19,37 +19,37 @@ async function fetchSwapiResource<T>(
   }
 
   return response.json();
-}
+};
 
-export async function fetchPeople(limit?: number): Promise<PersonType[]> {
+export const fetchPeople = async (limit?: number): Promise<PersonType[]> => {
   const data = await fetchSwapiResource<SWAPIResponse<PersonType>>('people');
   return limit ? data.results.slice(0, limit) : data.results;
-}
+};
 
-export async function searchPeople(query: string): Promise<PersonType[]> {
+export const searchPeople = async (query: string): Promise<PersonType[]> => {
   const data = await fetchSwapiResource<SWAPIResponse<PersonType>>(
     'people',
     query,
   );
   return data.results;
-}
+};
 
-export async function fetchFilms(limit?: number): Promise<FilmType[]> {
+export const fetchFilms = async (limit?: number): Promise<FilmType[]> => {
   const data = await fetchSwapiResource<SWAPIResponse<FilmType>>('films');
   return limit ? data.results.slice(0, limit) : data.results;
-}
+};
 
-export async function fetchFilmById(id: string): Promise<FilmType> {
+export const fetchFilmById = async (id: string): Promise<FilmType> => {
   const data = await fetchSwapiResource<FilmType>(`films/${id}`);
   return data;
-}
+};
 
-export async function fetchPlanets(limit?: number): Promise<PlanetType[]> {
+export const fetchPlanets = async (limit?: number): Promise<PlanetType[]> => {
   const data = await fetchSwapiResource<SWAPIResponse<PlanetType>>('planets');
   return limit ? data.results.slice(0, limit) : data.results;
-}
+};
 
-export async function fetchPlanetById(id: string): Promise<PlanetType> {
+export const fetchPlanetById = async (id: string): Promise<PlanetType> => {
   const data = await fetchSwapiResource<PlanetType>(`planets/${id}`);
   return data;
-}
+};

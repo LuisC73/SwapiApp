@@ -9,10 +9,24 @@ const SWAPI_BASE_URL = 'https://swapi.py4e.com/api';
 ## Funciones Principales
 
 ```typescript
-async function fetchSwapiResource<T>(
+const fetchSwapiResource = async <T>(
   endpoint: string,
   searchQuery?: string,
-): Promise<T>;
+): Promise<T> => {
+  const url = new URL(`${SWAPI_BASE_URL}/${endpoint}`);
+
+  if (searchQuery) {
+    url.searchParams.append('search', searchQuery);
+  }
+
+  const response = await fetch(url.toString());
+
+  if (!response.ok) {
+    throw new Error(`Error al consultar ${endpoint}: ${response.statusText}`);
+  }
+
+  return response.json();
+};
 ```
 
 | Parámetro     | Tipo    | Descripción                      |
@@ -134,10 +148,27 @@ const translations = {
 ### Funciones de Traducción
 
 ```typescript
-function translateAttributes<T extends ResourceType>(
+const translateAttributes = <T extends ResourceType>(
   data: any,
   type: T,
-): TranslatedType<T>;
+): T extends 'people'
+  ? PersonType
+  : T extends 'planets'
+  ? PlanetType
+  : T extends 'films'
+  ? FilmType
+  : never => {
+  const translationMap = translations[type];
+
+  const result = Object.entries(data).reduce((acc, [key, value]) => {
+    const translatedKey =
+      translationMap[key as keyof typeof translationMap] || key;
+    acc[translatedKey] = value;
+    return acc;
+  }, {} as any);
+
+  return result;
+};
 ```
 
 | Parámetro | Tipo         | Descripción                                    |
