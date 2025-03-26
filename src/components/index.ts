@@ -1,11 +1,11 @@
-export {Button} from './atoms/Button';
-export {Icon} from './atoms/Icon';
-export {Input} from './atoms/Input';
-export {Logo} from './atoms/Logo';
-export {ButtonIcon} from './molecules/ButtonIcon';
-export {Card} from './molecules/Card';
-export {SearchInput} from './molecules/SearchInput';
-export {ThemeToggle} from './molecules/ThemeToggle';
-export {TouchableCard} from './molecules/TouchableCard';
+export {Button, Icon, Input, Logo} from './atoms';
+export {
+  ButtonIcon,
+  Card,
+  SearchInput,
+  ThemeToggle,
+  TouchableCard,
+} from './molecules';
 export {Header} from './organisms/Header';
 export {ThemedApp} from './templates/ThemedApp';
+export {DetailScreen, HomeScreen, SearchScreen} from './pages';
