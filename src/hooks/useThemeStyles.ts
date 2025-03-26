@@ -1,11 +1,11 @@
-import {useTheme} from '../context/ThemeContext';
 import {StyleSheet} from 'react-native';
 import {darkColors, lightColors, spacing} from '../styles/theme';
+import {useTheme} from './useTheme';
 
 export const useThemeStyles = () => {
-  const {resolvedTheme} = useTheme();
+  const {theme} = useTheme();
 
-  const colors = resolvedTheme === 'dark' ? darkColors : lightColors;
+  const colors = theme === 'dark' ? darkColors : lightColors;
 
   return {
     colors: colors,

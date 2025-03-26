@@ -1,5 +1,5 @@
 import {IconProp} from '@fortawesome/fontawesome-svg-core';
-import { DimensionValue } from 'react-native';
+import {DimensionValue} from 'react-native';
 
 // atoms
 export interface ButtonProps {
@@ -22,6 +22,11 @@ export interface InputProps {
 }
 
 // molecules
+export interface ButtonIconProps {
+  icon: IconProps;
+  onPress: () => void;
+}
+
 export interface CardProps {
   title?: string;
   children: React.ReactNode;

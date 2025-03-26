@@ -2,6 +2,7 @@ export {Button} from './atoms/Button';
 export {Icon} from './atoms/Icon';
 export {Input} from './atoms/Input';
 export {Logo} from './atoms/Logo';
+export {ButtonIcon} from './molecules/ButtonIcon';
 export {Card} from './molecules/Card';
 export {SearchInput} from './molecules/SearchInput';
 export {ThemeToggle} from './molecules/ThemeToggle';

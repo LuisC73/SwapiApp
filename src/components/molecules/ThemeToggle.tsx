@@ -1,11 +1,12 @@
 import React from 'react';
-import {StyleSheet, Switch, Text, View} from 'react-native';
-import {useTheme} from '../../context/ThemeContext';
-import {useThemeStyles} from '../../hooks';
+import {StyleSheet, View} from 'react-native';
+import {useTheme, useThemeStyles} from '../../hooks';
+import {ButtonIcon} from './ButtonIcon';
 
 export const ThemeToggle = () => {
-  const {resolvedTheme, toggleTheme} = useTheme();
-  const {spacing, globalStyles} = useThemeStyles();
+  const {theme, toggleTheme} = useTheme();
+  const {colors, spacing} = useThemeStyles();
+  const isDarkMode = theme === 'dark';
 
   const localStyles = StyleSheet.create({
     toggleContainer: {
@@ -18,12 +19,13 @@ export const ThemeToggle = () => {
 
   return (
     <View style={localStyles.toggleContainer}>
-      <Text style={globalStyles.text}>Modo Oscuro</Text>
-      <Switch
-        value={resolvedTheme === 'dark'}
-        onValueChange={toggleTheme}
-        trackColor={{false: '#767577', true: '#81b0ff'}}
-        thumbColor={resolvedTheme === 'dark' ? '#f5dd4b' : '#f4f3f4'}
+      <ButtonIcon
+        icon={{
+          name: isDarkMode ? 'sun' : 'moon',
+          color: colors.background,
+          size: 20,
+        }}
+        onPress={toggleTheme}
       />
     </View>
   );

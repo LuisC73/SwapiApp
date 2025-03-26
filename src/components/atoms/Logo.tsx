@@ -1,14 +1,12 @@
 import {Image, StyleSheet} from 'react-native';
-import {useTheme} from '../../context/ThemeContext';
+import {useTheme} from '../../hooks';
 
 const imageSourceDark = require('../../assets/images/logo-starwars.png');
 const imageSourceLight = require('../../assets/images/logo-starwars-black.png');
 
 export const Logo = () => {
-  const {resolvedTheme} = useTheme();
-
-  const imageSource =
-    resolvedTheme === 'dark' ? imageSourceDark : imageSourceLight;
+  const {theme} = useTheme();
+  const imageSource = theme === 'dark' ? imageSourceDark : imageSourceLight;
 
   return <Image source={imageSource} style={styles.image} />;
 };
