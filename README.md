@@ -36,7 +36,7 @@ Aplicación móvil que consume la API SWAPI para mostrar personajes, películas 
 1. Clona el repositorio:
 
 ```bash
-git clone https://github.com/tu-usuario/star-wars-app.git
+git clone git@github.com:LuisC73/SwapiApp.git
 ```
 
 2. Instala dependencias:
