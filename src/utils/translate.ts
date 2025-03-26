@@ -31,7 +31,7 @@ const translations = {
 
 type ResourceType = keyof typeof translations;
 
-function translateAttributes<T extends ResourceType>(
+const translateAttributes = <T extends ResourceType>(
   data: any,
   type: T,
 ): T extends 'people'
@@ -40,7 +40,7 @@ function translateAttributes<T extends ResourceType>(
   ? PlanetType
   : T extends 'films'
   ? FilmType
-  : never {
+  : never => {
   const translationMap = translations[type];
 
   const result = Object.entries(data).reduce((acc, [key, value]) => {
@@ -51,7 +51,7 @@ function translateAttributes<T extends ResourceType>(
   }, {} as any);
 
   return result;
-}
+};
 
 export const translatePeopleAttributes = (data: any) => {
   return translateAttributes(data, 'people');

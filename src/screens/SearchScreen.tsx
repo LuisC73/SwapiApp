@@ -21,6 +21,8 @@ export const SearchScreen = ({navigation}: {navigation: any}) => {
     searchResults,
     isLoading: isLoadingSearch,
     isError: isErrorSearch,
+    hasSearched,
+    isEmptyResults,
     search,
     clearSearch,
   } = useSearchPeople();
@@ -40,10 +42,17 @@ export const SearchScreen = ({navigation}: {navigation: any}) => {
     }
   };
 
-  const displayedData =
-    searchQuery.trim() && searchResults.length > 0
-      ? searchResults
-      : initialData || [];
+  const displayedData = (() => {
+    if (!hasSearched && searchQuery.trim().length === 0) {
+      return initialData || [];
+    }
+
+    if (hasSearched) {
+      return searchResults;
+    }
+
+    return [];
+  })();
 
   const localStyles = StyleSheet.create({
     searchContainer: {
@@ -55,6 +64,10 @@ export const SearchScreen = ({navigation}: {navigation: any}) => {
       gap: spacing.medium,
       padding: spacing.large,
       paddingTop: 0,
+    },
+    emptyResultsText: {
+      textAlign: 'center',
+      marginTop: spacing.large,
     },
   });
 
@@ -89,6 +102,7 @@ export const SearchScreen = ({navigation}: {navigation: any}) => {
           }}
         />
       </View>
+
       <FlatList
         contentContainerStyle={localStyles.scrollView}
         data={displayedData}
@@ -117,13 +131,29 @@ export const SearchScreen = ({navigation}: {navigation: any}) => {
         )}
         keyExtractor={(item, index) => index.toString()}
         ListEmptyComponent={
-          <Text style={globalStyles.errorText}>
-            No se encontraron resultados
-          </Text>
+          <View style={globalStyles.centerContent}>
+            {isEmptyResults ? (
+              <Text
+                style={[globalStyles.errorText, localStyles.emptyResultsText]}>
+                No se encontraron resultados para "{searchQuery}"
+              </Text>
+            ) : !hasSearched && searchQuery.trim().length > 0 ? (
+              <Text style={[globalStyles.text, localStyles.emptyResultsText]}>
+                Presiona "Buscar" para realizar la búsqueda
+              </Text>
+            ) : initialData?.length === 0 ? (
+              <Text
+                style={[globalStyles.errorText, localStyles.emptyResultsText]}>
+                No hay datos disponibles
+              </Text>
+            ) : null}
+          </View>
         }
       />
       {isErrorSearch && (
-        <Text style={globalStyles.errorText}>No se encontraron resultados</Text>
+        <Text style={globalStyles.errorText}>
+          Error al realizar la búsqueda
+        </Text>
       )}
     </View>
   );
