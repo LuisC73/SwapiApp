@@ -1,10 +1,15 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {HomeScreen, SearchScreen, DetailScreen} from '../screens';
-import {Header, Icon} from '../components';
 import {IconProp} from '@fortawesome/fontawesome-svg-core';
-import { useThemeStyles } from '../hooks';
+import {useThemeStyles} from '../hooks';
+import {
+  Header,
+  Icon,
+  HomeScreen,
+  SearchScreen,
+  DetailScreen,
+} from '../components';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -28,7 +33,7 @@ const renderTabBarIcon =
 const renderHeader = () => <Header />;
 
 const HomeTabs = () => {
-    const {colors} = useThemeStyles();
+  const {colors} = useThemeStyles();
 
   return (
     <Tab.Navigator
